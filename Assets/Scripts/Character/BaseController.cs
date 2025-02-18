@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseController : MonoBehaviour
 {
-    #region Variables
+    #region Field
     protected Rigidbody2D rb;
     protected BoxCollider2D boxCol;
     protected SpriteRenderer characterRenderer;
@@ -29,6 +29,7 @@ public class BaseController : MonoBehaviour
 
     protected virtual void Update()
     {
+        HandleAction();
         Rotate(lookDir);
     }
 
@@ -75,6 +76,7 @@ public class BaseController : MonoBehaviour
         {
             rb = gameObject.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0f;
+            rb.freezeRotation = true;
         }
 
         characterRenderer = GetComponentInChildren<SpriteRenderer>();
