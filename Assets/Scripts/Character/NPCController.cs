@@ -13,6 +13,8 @@ public class NPCController : BaseController
     private delegate void NPCAction();
     private NPCAction action;
 
+    private float playerTriggerRadius;
+
     private float patrolTime;
     private float patrolElapsedTime;
 
@@ -68,7 +70,7 @@ public class NPCController : BaseController
         if (!TryGetComponent<CircleCollider2D>(out circleCol))
         {
             circleCol = gameObject.AddComponent<CircleCollider2D>();
-            circleCol.radius = 1f;
+            circleCol.radius = playerTriggerRadius;
         }
     }
 
@@ -77,6 +79,7 @@ public class NPCController : BaseController
         base.InitializeVariable();
         moveSpeed = 1f;
         moveDir = Vector2.left;
+        playerTriggerRadius = 1f;
         patrolTime = 3f;
         patrolElapsedTime = 0f;
         isMovingLeft = true;

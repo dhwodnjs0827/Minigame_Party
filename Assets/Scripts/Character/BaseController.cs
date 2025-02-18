@@ -18,8 +18,8 @@ public class BaseController : MonoBehaviour
     #region Unity Event Method
     protected virtual void Awake()
     {
-        InitializeComponent();
         InitializeVariable();
+        InitializeComponent();
     }
 
     protected virtual void Start()

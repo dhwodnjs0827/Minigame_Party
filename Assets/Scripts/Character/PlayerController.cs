@@ -16,7 +16,6 @@ public class PlayerController : BaseController
     protected override void Start()
     {
         base.Start();
-
         mainCam = Camera.main;
     }
 
