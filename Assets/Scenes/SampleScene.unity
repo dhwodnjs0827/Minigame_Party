@@ -5998,6 +5998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1674479082}
   - component: {fileID: 1674479083}
+  - component: {fileID: 1674479084}
   m_Layer: 0
   m_Name: MiniGameTrigger
   m_TagString: Untagged
@@ -6065,6 +6066,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 3}
   m_EdgeRadius: 0
+--- !u!114 &1674479084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674479081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958424f7beb69aa46a856d4625502255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scene: 1
 --- !u!1 &1678071696
 GameObject:
   m_ObjectHideFlags: 0

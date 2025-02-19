@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public void ChangeCameraPos(Vector2 targetPos)
+    public void ChangeCameraPos(Vector3 targetPos)
     {
-        float targetY = targetPos.y;
-        Vector3 target = new Vector3(transform.position.x, targetY, transform.position.z);
+        Vector3 endPos = targetPos;
+        Vector3 target = new Vector3(endPos.x, endPos.y, transform.position.z);
         transform.position = target;
     }
 }

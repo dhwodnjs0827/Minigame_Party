@@ -68,6 +68,7 @@ public class PlayerController : BaseController
         CurRoom = null;
         CanInteract = false;
     }
+
     protected override void InitializeBoxCollider2D()
     {
         base.InitializeBoxCollider2D();
