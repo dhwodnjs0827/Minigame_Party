@@ -7,10 +7,16 @@ public class PlayerController : BaseController
 {
     #region Field
     private Camera mainCam;
-
     private EventManager eventManager;
 
-    public bool CanInteract { get; set; }
+    public GameObject CurRoom
+    {
+        get; set;
+    }
+    public bool CanInteract
+    {
+        get; set;
+    }
     #endregion
 
     #region Method
@@ -36,12 +42,23 @@ public class PlayerController : BaseController
     {
         base.FixedUpdate();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Room"))
+        {
+            CameraController cam = Camera.main.GetComponent<CameraController>();
+            CurRoom = collision.gameObject;
+            cam.ChangeCameraPos(CurRoom.transform.position);
+        }
+    }
     #endregion
 
     #region Initialize Method
     protected override void InitializeVariable()
     {
         base.InitializeVariable();
+        CurRoom = null;
         CanInteract = false;
     }
     protected override void InitializeBoxCollider2D()

@@ -6,12 +6,11 @@ using UnityEngine;
 public class NPCController : BaseController
 {
     #region Field
-    // 테스트용
-    public PlayerController player;
     #region Variables
     private delegate void NPCAction();
     private NPCAction action;
 
+    private GameObject player;
     private float playerTriggerRadius;
 
     private float patrolTime;
@@ -54,6 +53,7 @@ public class NPCController : BaseController
         if (collision.CompareTag("Player"))
         {
             // 이벤트 트리거 활성화
+            player = collision.gameObject;
             action = LookPlayer;
             text.gameObject.SetActive(true);
         }
@@ -66,6 +66,7 @@ public class NPCController : BaseController
             // 이벤트 트리거 비활성화
             action = Patrol;
             text.gameObject.SetActive(false);
+            player = null;
         }
     }
     #endregion
