@@ -47,8 +47,15 @@ public class PlayerController : BaseController
     {
         if (collision.CompareTag("Room"))
         {
-            CameraController cam = Camera.main.GetComponent<CameraController>();
             CurRoom = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Room") && collision.gameObject != CurRoom)
+        {
+            CameraController cam = mainCam.GetComponent<CameraController>();
             cam.ChangeCameraPos(CurRoom.transform.position);
         }
     }
