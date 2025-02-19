@@ -11,15 +11,20 @@ namespace MiniGame
         private PlayerController player;
         private ObjectPoolManager pool;
 
-        private Vector3 lastObstacelPos;
+        private float elapsedTime;
+        private Vector3 lastObstaclePos;
+        private Vector3 lastEnviromentPos;
 
-        public Vector3 LastObstaclePos => lastObstacelPos;
+        private int score;
 
         public static GameManager Instance => instance;
 
         private void Awake()
         {
             instance = this;
+            lastObstaclePos = new Vector3(4f, 0, 0);
+            lastEnviromentPos = Vector3.zero;
+            score = 0;
         }
 
         private void Start()
@@ -27,18 +32,43 @@ namespace MiniGame
             player = FindObjectOfType<PlayerController>();
             pool = ObjectPoolManager.Instance;
 
-            lastObstacelPos = new Vector3(4f, 0, 0);
+            ActiveEnviroment();
+            ActiveObstacle();
         }
 
         private void Update()
         {
-            ActiveObstacle();
+            if (player.IsDead)
+            {
+                return;
+            }
+
+            elapsedTime += Time.deltaTime;
+            if (elapsedTime >= 3f)
+            {
+                ActiveObstacle();
+                ActiveEnviroment();
+                elapsedTime = 0f;
+            }
         }
 
         private void ActiveObstacle()
         {
             GameObject obstacle = pool.GetObstacle();
-            obstacle.transform.position = lastObstacelPos + Vector3.right * Random.Range(3f, 5f);
+            obstacle.transform.position = lastObstaclePos + Vector3.right * Random.Range(5, 10);
+            lastObstaclePos = obstacle.transform.position;
+        }
+
+        private void ActiveEnviroment()
+        {
+            GameObject enviroment = pool.GetEnviroment();
+            enviroment.transform.position = lastEnviromentPos + Vector3.right * 22;
+            lastEnviromentPos = enviroment.transform.position;
+        }
+
+        public void AddScore()
+        {
+            score++;
         }
     }
 }

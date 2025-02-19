@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5419221937265345221}
   m_Layer: 0
   m_Name: weapon_arrow 3
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 5094987873576110133}
   m_Layer: 0
   m_Name: weapon_arrow 5
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 549888824808098067}
   m_Layer: 0
   m_Name: weapon_arrow 8
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 5170960542681102830}
   m_Layer: 0
   m_Name: weapon_arrow 0
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -530,9 +530,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4872955135930769564}
   - component: {fileID: 7305171197305507103}
+  - component: {fileID: 4589856704299721959}
   m_Layer: 0
   m_Name: Obstacle
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -573,6 +574,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1ef29898687194688233d47f59fad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &4589856704299721959
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3067102907536300582}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3125, y: 10}
+  m_EdgeRadius: 0
 --- !u!1 &3242410618297227121
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +632,7 @@ GameObject:
   - component: {fileID: 5542989373807973982}
   m_Layer: 0
   m_Name: weapon_arrow 2
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -716,7 +762,7 @@ GameObject:
   - component: {fileID: 4483178116085991987}
   m_Layer: 0
   m_Name: weapon_arrow 7
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -846,7 +892,7 @@ GameObject:
   - component: {fileID: 4443721460226793518}
   m_Layer: 0
   m_Name: weapon_arrow 1
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -976,7 +1022,7 @@ GameObject:
   - component: {fileID: 4764312169061463737}
   m_Layer: 0
   m_Name: weapon_arrow 4
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1106,7 +1152,7 @@ GameObject:
   - component: {fileID: 3042091078791753440}
   m_Layer: 0
   m_Name: weapon_arrow 6
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

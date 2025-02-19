@@ -10,9 +10,15 @@ namespace MiniGame
 
         private void OnEnable()
         {
-            int removeIndex = Random.Range(1, obstacles.Length);
-            int removeRange = Random.Range(2, 4);
-            for (int i = removeIndex; i <= removeRange && i < obstacles.Length; i++)
+            for (int i = 0; i < obstacles.Length; i++)
+            {
+                obstacles[i].gameObject.SetActive(true);
+            }
+
+            int removeIndex = Random.Range(1, obstacles.Length - 1);
+            removeIndex = Mathf.Clamp(removeIndex, 1, obstacles.Length - 1);
+            int removeRange = Random.Range(3, 4);
+            for (int i = removeIndex; i < removeIndex + removeRange && i < obstacles.Length; i++)
             {
                 obstacles[i].gameObject.SetActive(false);
             }

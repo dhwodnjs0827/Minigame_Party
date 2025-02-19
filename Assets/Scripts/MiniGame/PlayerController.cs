@@ -9,6 +9,10 @@ namespace MiniGame
         private float forwardSpeed;
         private float jumpForce;
         private bool isJump;
+        private bool isDead;
+        public bool IsDead => isDead;
+
+        private GameManager gameManager;
 
         private Rigidbody2D rb;
         private Animator animator;
@@ -17,6 +21,8 @@ namespace MiniGame
         {
             forwardSpeed = 3f;
             jumpForce = 6f;
+            isJump = false;
+            isDead = false;
 
             if (!TryGetComponent<Rigidbody2D>(out rb))
             {
@@ -28,9 +34,14 @@ namespace MiniGame
             animator.SetBool("IsMove", true);
         }
 
+        private void Start()
+        {
+            gameManager = GameManager.Instance;
+        }
+
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 isJump = true;
             }
@@ -48,6 +59,22 @@ namespace MiniGame
             }
 
             rb.velocity = velocity;
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Obstacle"))
+            {
+                isDead = true;
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Obstacle"))
+            {
+                gameManager.AddScore();
+            }
         }
     }
 }
