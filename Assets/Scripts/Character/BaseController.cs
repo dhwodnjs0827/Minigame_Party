@@ -8,13 +8,13 @@ public class BaseController : MonoBehaviour
     #region Variables
     protected Vector2 moveDir;
     protected Vector2 lookDir;
-    protected float moveSpeed;
     #endregion
 
     #region Components
     protected Rigidbody2D rb;
     protected BoxCollider2D boxCol;
     protected SpriteRenderer characterRenderer;
+    protected StatHandler statHandler;
     #endregion
     #endregion
 
@@ -60,6 +60,7 @@ public class BaseController : MonoBehaviour
     {
         IntializeRigidbocy2D();
         InitializeBoxCollider2D();
+        InitializeStatHandler();
         characterRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -80,6 +81,14 @@ public class BaseController : MonoBehaviour
             boxCol = gameObject.AddComponent<BoxCollider2D>();
         }
     }
+
+    protected virtual void InitializeStatHandler()
+    {
+        if (!TryGetComponent<StatHandler>(out statHandler))
+        {
+            statHandler = gameObject.AddComponent<StatHandler>();
+        }
+    }
     #endregion
 
     /// <summary>
@@ -96,7 +105,7 @@ public class BaseController : MonoBehaviour
     /// <param name="dir">캐릭터의 이동 방향</param>
     private void Move(Vector2 dir)
     {
-        dir = dir * moveSpeed;
+        dir = dir * statHandler.Speed;
         rb.velocity = dir;
     }
 

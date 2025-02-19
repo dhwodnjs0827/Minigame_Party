@@ -75,7 +75,6 @@ public class NPCController : BaseController
     {
         base.InitializeVariable();
 
-        moveSpeed = 1f;
         moveDir = Vector2.left;
         playerTriggerRadius = 1f;
         patrolTime = 3f;
@@ -109,6 +108,13 @@ public class NPCController : BaseController
             circleCol = gameObject.AddComponent<CircleCollider2D>();
         }
         circleCol.radius = playerTriggerRadius;
+    }
+
+    protected override void InitializeStatHandler()
+    {
+        base.InitializeStatHandler();
+        statHandler.Health = int.MaxValue;
+        statHandler.Speed = 1f;
     }
     #endregion
 

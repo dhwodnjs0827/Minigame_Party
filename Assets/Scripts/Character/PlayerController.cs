@@ -42,7 +42,6 @@ public class PlayerController : BaseController
     protected override void InitializeVariable()
     {
         base.InitializeVariable();
-        moveSpeed = 5f;
         CanInteract = false;
     }
     protected override void InitializeBoxCollider2D()
@@ -50,6 +49,13 @@ public class PlayerController : BaseController
         base.InitializeBoxCollider2D();
         boxCol.offset = new Vector2(0, -0.2148886f);
         boxCol.size = new Vector2(1, 1.429777f);
+    }
+
+    protected override void InitializeStatHandler()
+    {
+        base.InitializeStatHandler();
+        statHandler.Health = 10;
+        statHandler.Speed = 5f;
     }
     #endregion
 
