@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5203157515578361535}
   - component: {fileID: 4389213183361172545}
   - component: {fileID: 9205954787034032227}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22df4ef835a2fa6418041467981c8d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanInteract: 0
 --- !u!114 &9205954787034032227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +162,7 @@ GameObject:
   - component: {fileID: 2588662198542244323}
   - component: {fileID: 1695058663148659122}
   - component: {fileID: 6301034902493468240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

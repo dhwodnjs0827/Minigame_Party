@@ -46,11 +46,19 @@ public class NPCController : BaseController
     private void OnTriggerEnter2D(Collider2D collision)
     {
         action = LookPlayer;
+        if (collision.CompareTag("Player"))
+        {
+            // 이벤트 트리거 활성화
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         action = Patrol;
+        if (collision.CompareTag("Player"))
+        {
+            // 이벤트 트리거 비활성화
+        }
     }
     #endregion
 

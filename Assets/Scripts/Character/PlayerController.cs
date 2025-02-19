@@ -7,6 +7,10 @@ public class PlayerController : BaseController
 {
     private Camera mainCam;
 
+    public bool CanInteract;
+
+    private EventManager eventManager;
+
     #region Unity Event Method
     protected override void Awake()
     {
@@ -17,6 +21,7 @@ public class PlayerController : BaseController
     {
         base.Start();
         mainCam = Camera.main;
+        eventManager = EventManager.Instance;
     }
 
     protected override void Update()
@@ -46,6 +51,7 @@ public class PlayerController : BaseController
     {
         base.InitializeVariable();
         moveSpeed = 5f;
+        CanInteract = false;
     }
 
     private void OnMove(InputValue inputValue)
@@ -67,6 +73,14 @@ public class PlayerController : BaseController
         else
         {
             lookDir.Normalize();
+        }
+    }
+
+    private void OnInteract(InputValue inputValue)
+    {
+        if (CanInteract)
+        {
+            eventManager.onPlayerInteract?.Invoke();
         }
     }
 }
