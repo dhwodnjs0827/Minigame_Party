@@ -17,6 +17,10 @@ namespace MiniGame
 
         private int score;
 
+        private bool isGameOver;
+        public bool IsGameOver => isGameOver;
+        public int Score => score;
+
         public static GameManager Instance => instance;
 
         private void Awake()
@@ -25,6 +29,7 @@ namespace MiniGame
             lastObstaclePos = new Vector3(4f, 0, 0);
             lastEnviromentPos = Vector3.zero;
             score = 0;
+            isGameOver = false;
         }
 
         private void Start()
@@ -40,6 +45,7 @@ namespace MiniGame
         {
             if (player.IsDead)
             {
+                isGameOver = true;
                 return;
             }
 
