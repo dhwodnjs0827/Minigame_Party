@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class NPCController : BaseController
 {
+    #region Field
     // 테스트용
     public PlayerController player;
-
-    #region Field
-    private CircleCollider2D circleCol;
-
+    #region Variables
     private delegate void NPCAction();
     private NPCAction action;
 
@@ -21,6 +20,13 @@ public class NPCController : BaseController
     private bool isMovingLeft;
     #endregion
 
+    #region Component
+    private CircleCollider2D circleCol;
+    [SerializeField] private TextMeshProUGUI text;
+    #endregion
+    #endregion
+
+    #region Method
     #region Unity Event Method
     protected override void Awake()
     {
@@ -45,46 +51,30 @@ public class NPCController : BaseController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        action = LookPlayer;
         if (collision.CompareTag("Player"))
         {
             // 이벤트 트리거 활성화
+            action = LookPlayer;
+            text.gameObject.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        action = Patrol;
         if (collision.CompareTag("Player"))
         {
             // 이벤트 트리거 비활성화
+            action = Patrol;
+            text.gameObject.SetActive(false);
         }
     }
     #endregion
 
-    protected override void InitializeComponent()
-    {
-        base.InitializeComponent();
-
-        rb.bodyType = RigidbodyType2D.Kinematic;
-
-        if (!TryGetComponent<BoxCollider2D>(out boxCol))
-        {
-            boxCol = gameObject.AddComponent<BoxCollider2D>();
-            boxCol.offset = new Vector2(0, -0.2148886f);
-            boxCol.size = new Vector2(1, 1.429777f);
-        }
-
-        if (!TryGetComponent<CircleCollider2D>(out circleCol))
-        {
-            circleCol = gameObject.AddComponent<CircleCollider2D>();
-            circleCol.radius = playerTriggerRadius;
-        }
-    }
-
+    #region Initialize Method
     protected override void InitializeVariable()
     {
         base.InitializeVariable();
+
         moveSpeed = 1f;
         moveDir = Vector2.left;
         playerTriggerRadius = 1f;
@@ -94,6 +84,33 @@ public class NPCController : BaseController
 
         action = Patrol;
     }
+
+    protected override void InitializeComponent()
+    {
+        base.InitializeComponent();
+        InitializeCircleCollider2D();
+    }
+
+    protected override void IntializeRigidbocy2D()
+    {
+        base.IntializeRigidbocy2D();
+    }
+
+    protected override void InitializeBoxCollider2D()
+    {
+        base.InitializeBoxCollider2D();
+        boxCol.excludeLayers = 1 << LayerMask.NameToLayer("Player");
+    }
+
+    private void InitializeCircleCollider2D()
+    {
+        if (!TryGetComponent<CircleCollider2D>(out circleCol))
+        {
+            circleCol = gameObject.AddComponent<CircleCollider2D>();
+        }
+        circleCol.radius = playerTriggerRadius;
+    }
+    #endregion
 
     protected override void HandleAction()
     {
@@ -121,4 +138,5 @@ public class NPCController : BaseController
         moveDir = Vector2.zero;
         lookDir = (player.transform.position - transform.position).normalized;
     }
+    #endregion
 }

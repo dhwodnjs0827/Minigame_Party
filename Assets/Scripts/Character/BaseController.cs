@@ -5,16 +5,20 @@ using UnityEngine;
 public class BaseController : MonoBehaviour
 {
     #region Field
-    protected Rigidbody2D rb;
-    protected BoxCollider2D boxCol;
-    protected SpriteRenderer characterRenderer;
-
+    #region Variables
     protected Vector2 moveDir;
     protected Vector2 lookDir;
-
     protected float moveSpeed;
     #endregion
 
+    #region Components
+    protected Rigidbody2D rb;
+    protected BoxCollider2D boxCol;
+    protected SpriteRenderer characterRenderer;
+    #endregion
+    #endregion
+
+    #region Method
     #region Unity Event Method
     protected virtual void Awake()
     {
@@ -36,6 +40,45 @@ public class BaseController : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         Move(moveDir);
+    }
+    #endregion
+
+    #region Initailize Method
+    /// <summary>
+    /// 변수를 초기화 시켜주는 메서드
+    /// </summary>
+    protected virtual void InitializeVariable()
+    {
+        moveDir = Vector2.zero;
+        lookDir = Vector2.zero;
+    }
+
+    /// <summary>
+    /// 컴포넌트를 초기화 시켜주는 메서드
+    /// </summary>
+    protected virtual void InitializeComponent()
+    {
+        IntializeRigidbocy2D();
+        InitializeBoxCollider2D();
+        characterRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    protected virtual void IntializeRigidbocy2D()
+    {
+        if (!TryGetComponent<Rigidbody2D>(out rb))
+        {
+            rb = gameObject.AddComponent<Rigidbody2D>();
+        }
+        rb.gravityScale = 0f;
+        rb.freezeRotation = true;
+    }
+    
+    protected virtual void InitializeBoxCollider2D()
+    {
+        if (!TryGetComponent<BoxCollider2D>(out boxCol))
+        {
+            boxCol = gameObject.AddComponent<BoxCollider2D>();
+        }
     }
     #endregion
 
@@ -66,28 +109,5 @@ public class BaseController : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         characterRenderer.flipX = Mathf.Abs(angle) > 90f;
     }
-
-    /// <summary>
-    /// 컴포넌트를 초기화 시켜주는 메서드
-    /// </summary>
-    protected virtual void InitializeComponent()
-    {
-        if (!TryGetComponent<Rigidbody2D>(out rb))
-        {
-            rb = gameObject.AddComponent<Rigidbody2D>();
-            rb.gravityScale = 0f;
-            rb.freezeRotation = true;
-        }
-
-        characterRenderer = GetComponentInChildren<SpriteRenderer>();
-    }
-
-    /// <summary>
-    /// 변수를 초기화 시켜주는 메서드
-    /// </summary>
-    protected virtual void InitializeVariable()
-    {
-        moveDir = Vector2.zero;
-        lookDir = Vector2.zero;
-    }
+    #endregion
 }

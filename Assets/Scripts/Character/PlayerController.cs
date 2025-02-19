@@ -5,12 +5,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : BaseController
 {
+    #region Field
     private Camera mainCam;
-
-    public bool CanInteract;
 
     private EventManager eventManager;
 
+    public bool CanInteract { get; set; }
+    #endregion
+
+    #region Method
     #region Unity Event Method
     protected override void Awake()
     {
@@ -35,24 +38,20 @@ public class PlayerController : BaseController
     }
     #endregion
 
-    protected override void InitializeComponent()
-    {
-        base.InitializeComponent();
-
-        if (!TryGetComponent<BoxCollider2D>(out boxCol))
-        {
-            boxCol = gameObject.AddComponent<BoxCollider2D>();
-            boxCol.offset = new Vector2(0, -0.2148886f);
-            boxCol.size = new Vector2(1, 1.429777f);
-        }
-    }
-
+    #region Initialize Method
     protected override void InitializeVariable()
     {
         base.InitializeVariable();
         moveSpeed = 5f;
         CanInteract = false;
     }
+    protected override void InitializeBoxCollider2D()
+    {
+        base.InitializeBoxCollider2D();
+        boxCol.offset = new Vector2(0, -0.2148886f);
+        boxCol.size = new Vector2(1, 1.429777f);
+    }
+    #endregion
 
     private void OnMove(InputValue inputValue)
     {
@@ -83,4 +82,5 @@ public class PlayerController : BaseController
             eventManager.onPlayerInteract?.Invoke();
         }
     }
+    #endregion
 }
