@@ -15,6 +15,7 @@ public class BaseController : MonoBehaviour
     protected BoxCollider2D boxCol;
     protected SpriteRenderer characterRenderer;
     protected StatHandler statHandler;
+    protected AnimationHandler animationHandler;
     #endregion
     #endregion
 
@@ -61,6 +62,7 @@ public class BaseController : MonoBehaviour
         IntializeRigidbocy2D();
         InitializeBoxCollider2D();
         InitializeStatHandler();
+        InitializeAnimationHandler();
         characterRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -89,6 +91,14 @@ public class BaseController : MonoBehaviour
             statHandler = gameObject.AddComponent<StatHandler>();
         }
     }
+
+    protected virtual void InitializeAnimationHandler()
+    {
+        if (!TryGetComponent<AnimationHandler>(out animationHandler))
+        {
+            animationHandler = gameObject.AddComponent<AnimationHandler>();
+        }
+    }
     #endregion
 
     /// <summary>
@@ -107,6 +117,7 @@ public class BaseController : MonoBehaviour
     {
         dir = dir * statHandler.Speed;
         rb.velocity = dir;
+        animationHandler.Move(dir);
     }
 
     /// <summary>

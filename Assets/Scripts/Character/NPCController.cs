@@ -78,7 +78,7 @@ public class NPCController : BaseController
 
         moveDir = Vector2.left;
         playerTriggerRadius = 1f;
-        patrolTime = 3f;
+        patrolTime = 2f;
         patrolElapsedTime = 0f;
         isMovingLeft = true;
 
@@ -115,7 +115,7 @@ public class NPCController : BaseController
     {
         base.InitializeStatHandler();
         statHandler.Health = int.MaxValue;
-        statHandler.Speed = 1f;
+        statHandler.Speed = 0f;
     }
     #endregion
 
@@ -127,6 +127,10 @@ public class NPCController : BaseController
 
     private void Patrol()
     {
+        if (statHandler.Speed == 0f)
+        {
+            return;
+        }
         patrolElapsedTime += Time.deltaTime;
         moveDir = isMovingLeft ? Vector2.left : Vector2.right;
 
