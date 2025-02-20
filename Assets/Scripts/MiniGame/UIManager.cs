@@ -16,6 +16,7 @@ namespace MiniGame
         private void Start()
         {
             gameManager = GameManager.Instance;
+            bestScoreTxt.text = $"BestScore: {gameManager.BestScore}";
         }
 
         private void Update()
@@ -23,6 +24,7 @@ namespace MiniGame
             if (gameManager.IsGameOver)
             {
                 gameOverImagae.SetActive(true);
+                bestScoreTxt.text = $"BestScore: {gameManager.BestScore}";
                 return;
             }
             curScoreTxt.text = $"Score: {gameManager.Score}";

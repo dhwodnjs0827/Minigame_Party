@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MiniGame
 {
@@ -16,10 +17,15 @@ namespace MiniGame
         private Vector3 lastEnviromentPos;
 
         private int score;
+        private int bestScore;
 
         private bool isGameOver;
+
+        private UIManager uiManager;
+
         public bool IsGameOver => isGameOver;
         public int Score => score;
+        public int BestScore => bestScore;
 
         public static GameManager Instance => instance;
 
@@ -29,6 +35,7 @@ namespace MiniGame
             lastObstaclePos = new Vector3(4f, 0, 0);
             lastEnviromentPos = Vector3.zero;
             score = 0;
+            bestScore = PlayerPrefs.GetInt("BestScore", 0);
             isGameOver = false;
         }
 
@@ -46,6 +53,11 @@ namespace MiniGame
             if (player.IsDead)
             {
                 isGameOver = true;
+                if (score > bestScore)
+                {
+                    PlayerPrefs.SetInt("BestScore", score);
+                    bestScore = score;
+                }
                 return;
             }
 
@@ -75,6 +87,11 @@ namespace MiniGame
         public void AddScore()
         {
             score++;
+        }
+
+        public void Restart()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
