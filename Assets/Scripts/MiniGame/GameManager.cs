@@ -37,12 +37,15 @@ namespace MiniGame
             score = 0;
             bestScore = PlayerPrefs.GetInt("BestScore", 0);
             isGameOver = false;
+
+            Time.timeScale = 0f;
         }
 
         private void Start()
         {
             player = FindObjectOfType<PlayerController>();
             pool = ObjectPoolManager.Instance;
+            uiManager = UIManager.Instance;
 
             ActiveEnviroment();
             ActiveObstacle();
@@ -52,17 +55,11 @@ namespace MiniGame
         {
             if (player.IsDead)
             {
-                isGameOver = true;
-                if (score > bestScore)
-                {
-                    PlayerPrefs.SetInt("BestScore", score);
-                    bestScore = score;
-                }
                 return;
             }
 
             elapsedTime += Time.deltaTime;
-            if (elapsedTime >= 3f)
+            if (elapsedTime >= 2f)
             {
                 ActiveObstacle();
                 ActiveEnviroment();
@@ -89,9 +86,28 @@ namespace MiniGame
             score++;
         }
 
-        public void Restart()
+        public void StartGame()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Time.timeScale = 1f;
+            uiManager.StartGame();
+        }
+
+        public void ExitGame()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene((int)EScene.Main);
+        }
+
+        public void GameOver()
+        {
+            Time.timeScale = 0f;
+            isGameOver = true;
+            if (score > bestScore)
+            {
+                PlayerPrefs.SetInt("BestScore", score);
+                bestScore = score;
+            }
+            uiManager.GameOver();
         }
     }
 }

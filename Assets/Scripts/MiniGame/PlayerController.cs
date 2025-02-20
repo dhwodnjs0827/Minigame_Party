@@ -20,7 +20,7 @@ namespace MiniGame
         private void Awake()
         {
             forwardSpeed = 3f;
-            jumpForce = 6f;
+            jumpForce = 5f;
             isJump = false;
             isDead = false;
 
@@ -66,6 +66,7 @@ namespace MiniGame
             if (collision.gameObject.CompareTag("Obstacle"))
             {
                 isDead = true;
+                gameManager.GameOver();
             }
         }
 
